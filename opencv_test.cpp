@@ -52,7 +52,7 @@
 		//Variables for trackbars
 		int h1 = 0; int s1 = 30; int v1 = 80;
 		int h2 = 20; int s2 = 150; int v2 = 255;
-		
+		//H : 色调   S:饱和度  V:亮度
 		//Creating the trackbars
 		cvCreateTrackbar("H1", "cnt", &h1, 255, 0);
 		cvCreateTrackbar("H2", "cnt", &h2, 255, 0);
@@ -81,7 +81,7 @@
 			cvCvtColor(frame, hsvframe, CV_BGR2HSV);
 			//Thresholding the frame for yellow	//
 			cvInRangeS(hsvframe, cvScalar(h1, s1, v1), cvScalar(h2, s2, v2), threshy);
-			//Filtering the frame  //中值滤波
+			//Filtering the frame  //中值滤波  7*7滤波器
 			cvSmooth(threshy, threshy, CV_MEDIAN, 7, 7);
 			//Finding largest contour	
 			threshy = FC_FindBiggestContours(threshy);
